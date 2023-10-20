@@ -7,8 +7,8 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        # Handle POST Request here
-        print("abcefg")
+        
+        print(request.form["q"])
         return render_template("fake_google.html")
     
     return render_template("fake_google.html")
