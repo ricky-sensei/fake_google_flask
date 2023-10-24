@@ -1,7 +1,12 @@
+import os 
 from flask import Flask, render_template, request
 import gspread
 from google.oauth2.service_account import Credentials
+from dotenv import load_dotenv
 
+load_dotenv()
+
+SHEET_KEY = os.environ.get("SPREADSHEET_KEY")
 
 # お決まりの文句
 # 2つのAPIを記述しないとリフレッシュトークンを3600秒毎に発行し続けなければならない
@@ -11,11 +16,10 @@ credentials = Credentials.from_service_account_file(".skilful-ethos-402603-4adec
 # OAuth2の資格情報を使用してGoogle APIにログイン。
 gc = gspread.authorize(credentials)
 # スプレッドシートIDを変数に格納する。
-SPREADSHEET_KEY = "1-IC_cpdm3sQMdyCwxgIhzHzZScGP1PGkAja5jTNuY2Q"
-# スプレッドシート（ブック）を開く
-workbook = gc.open_by_key(SPREADSHEET_KEY)
 
-workbook = gc.open_by_key(SPREADSHEET_KEY)
+# スプレッドシート（ブック）を開く
+workbook = gc.open_by_key(SHEET_KEY)
+
 # シートの一覧を取得する。（リスト形式）
 worksheets = workbook.worksheets()
 
@@ -26,8 +30,6 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         # スプレッドシート　https://docs.google.com/spreadsheets/d/1-IC_cpdm3sQMdyCwxgIhzHzZScGP1PGkAja5jTNuY2Q/edit?usp=sharing
-        # シートID　（のちに.envに記入　1-IC_cpdm3sQMdyCwxgIhzHzZScGP1PGkAja5jTNuY2Q）
-
         # シートを開く
         worksheet = workbook.worksheet("シート1")
 
