@@ -3,6 +3,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 
+
 # お決まりの文句
 # 2つのAPIを記述しないとリフレッシュトークンを3600秒毎に発行し続けなければならない
 scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
