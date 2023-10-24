@@ -3,12 +3,11 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 
-
 # お決まりの文句
 # 2つのAPIを記述しないとリフレッシュトークンを3600秒毎に発行し続けなければならない
 scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
 # ダウンロードしたjsonファイル名をクレデンシャル変数に設定。
-credentials = Credentials.from_service_account_file("skilful-ethos-402603-4adec231668c.json", scopes=scope)
+credentials = Credentials.from_service_account_file(".skilful-ethos-402603-4adec231668c.json", scopes=scope)
 # OAuth2の資格情報を使用してGoogle APIにログイン。
 gc = gspread.authorize(credentials)
 # スプレッドシートIDを変数に格納する。
